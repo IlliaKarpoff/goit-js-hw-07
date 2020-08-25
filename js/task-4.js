@@ -1,4 +1,4 @@
-// Завдання 4 -
+// Завдання 4 +
 // Лічильник складається зі спана і кнопок, які повинні збільшувати і зменшувати значення лічильника на 1.
 
 // Створи змінну counterValue в якій буде зберігається поточне значення   лічильника.
@@ -11,24 +11,19 @@
   <button type="button" data-action="increment">+1</button>
 </div> */}
 
-let counterValue = 10;
-const btnDecr = document.querySelector('button[data-action="decrement"]');
 const value = document.querySelector('#value');
+let counterValue = Number(value.textContent);
+const btnDecr = document.querySelector('button[data-action="decrement"]');
 const btnIncr = document.querySelector('button[data-action="increment"]');
 
-const decrement = counterValue => {
-    console.log('click!');
+const decrement = () => {
     counterValue -= 1;
     value.textContent = counterValue;
-    return counterValue;
 }
-const increment = counterValue => {
-    console.log('click!');
+const increment = () => {
     counterValue += 1;
     value.textContent = counterValue;
-    return console.log(counterValue);
 }
 
 btnDecr.addEventListener('click', decrement);
-btnIncr.addEventListener('click', increment);// - не работает!
-// value.textContent = counterValue;
+btnIncr.addEventListener('click', increment);
