@@ -23,50 +23,64 @@
 
 
 let amount;
-const array = [];
-const boxRef = document.querySelector('#boxes')
+const boxRef = document.querySelector('#boxes');
 const inputNumberRef = document.querySelector('#controls>input');
 inputNumberRef.placeholder = 'Enter a number';
 inputNumberRef.title = 'Enter a number';
+inputNumberRef.textContent = 5;
 const createBtn = document.querySelector('button[data-action="render"]');
 const destroyBtn = document.querySelector('button[data-action="destroy"]');
 
+// варіант 1
 const handleAmount = event => {
-    amount = event.target.value;
-    array.length = amount;
-    console.log('array.length',array.length);
-    console.log(array);
+    amount = Number(event.target.value);
+    console.log('amount =',amount);
 }
-// const creatorDiv = () => {
-    //     const divRef = document.createElement('div');
-    //     divRef.classList.add('gallery-item');
-    //     boxRef.appendChild(divRef);
-    //     return divRef;
-//     // return boxRef;
-// }
-// console.log(creatorDiv());
-
-// const createBoxes = (amount) => {
-    //     for (let i = 0; i < amount; i += 1) {
-        //         // creatorDiv();
-//         boxRef.appendChild(creatorDiv());
-//     }
-//     return boxRef;
-// }
-
-inputNumberRef.addEventListener('change', handleAmount);
-// createBtn.addEventListener('click', createBoxes);
-// createBtn.addEventListener('click', creatorDiv)
-// console.log(amount);
-
-const createGalleryItem = (el) => {
-    
+const createDiv = () => {
     const divRef = document.createElement('div');
     divRef.classList.add('gallery-item', 'flexbox');
-    
-    return divRef;
+    return divRef;;
 }
-const galleryItems = array.map(el => createGalleryItem(el));
-// console.log(galleryItems);
-boxRef.append(...galleryItems);
-console.log(boxRef);
+const createBoxes = () => {
+    for (let i = 0; i < amount; i += 1) {
+        boxRef.appendChild(createDiv());
+    }
+    console.log(boxRef);
+}
+const destroyBoxes = () => {
+    for (let i = 0; i < amount; i += 1) {
+        document.querySelector('#boxes').lastElementChild.remove()
+    }
+    console.log(boxRef);
+}
+inputNumberRef.addEventListener('change', handleAmount);
+createBtn.addEventListener('click', createBoxes);
+destroyBtn.addEventListener('click', destroyBoxes);
+// сьогодні вночі додам ЦСС            
+
+
+
+// // варіант 2
+// const array = [];
+// const handleAmount = event => {
+//     amount = event.target.value;
+//     array.length = amount;
+//     console.log('array.length',array.length);
+//     console.log(array);
+// }
+// const createDiv = () => {
+//     const divRef = document.createElement('div');
+//     divRef.classList.add('gallery-item', 'flexbox');
+//     return divRef;
+// }
+// // console.log(createDiv()); // - перевірка = функція createDiv() працює
+// // const galleryItems = array.map(() => createDiv()); // - в цьому місці чомусь створюється порожній масив, а не такий як меп
+// const createBoxes = (event) => {
+//     const galleryItems = array.map(() => createDiv()); // - тут функція createDiv() HE працює
+//     console.log('galleryItems',galleryItems);
+//     console.log('galleryItems.length',galleryItems.length);
+//     boxRef.append(...galleryItems);
+//     return console.log(boxRef);
+// }
+// inputNumberRef.addEventListener('change', handleAmount);
+// createBtn.addEventListener('click', createBoxes);
