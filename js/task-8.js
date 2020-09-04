@@ -6,9 +6,7 @@
 
 // Створи функцію createBoxes(amount), яка приймає 1 параметр amount - число. 
 // Функція створює стільки div, скільки вказано в amount і додає їх в div#boxes.
-
 // Кожен створений div:
-
 // Має випадковий rgb колір фону
 // Розміри найпершого div - 30px на 30px
 // Кожен наступний div після першого, повинен бути ширше і вище попереднього на   10px
@@ -22,12 +20,14 @@
 <div id="boxes"></div> */}
 
 
+function generateColor() {
+  return '#' + Math.floor(Math.random()*16777215).toString(16);
+}
 let amount;
 const boxRef = document.querySelector('#boxes');
 const inputNumberRef = document.querySelector('#controls>input');
 inputNumberRef.placeholder = 'Enter a number';
 inputNumberRef.title = 'Enter a number';
-inputNumberRef.textContent = 5;
 const createBtn = document.querySelector('button[data-action="render"]');
 const destroyBtn = document.querySelector('button[data-action="destroy"]');
 
@@ -36,14 +36,15 @@ const handleAmount = event => {
     amount = Number(event.target.value);
     console.log('amount =',amount);
 }
-const createDiv = () => {
-    const divRef = document.createElement('div');
-    divRef.classList.add('gallery-item', 'flexbox');
-    return divRef;;
-}
 const createBoxes = () => {
     for (let i = 0; i < amount; i += 1) {
-        boxRef.appendChild(createDiv());
+        const divRef = document.createElement('div');
+        divRef.classList.add('gallery-item', 'flexbox');
+        divRef.style.backgroundColor = generateColor();
+        divRef.style.width = `${30+i*10}px`;
+        divRef.style.height = `${30+i*10}px`;
+        boxRef.appendChild(divRef);
+        // boxRef.appendChild(createDiv());
     }
     console.log(boxRef);
 }
@@ -53,10 +54,12 @@ const destroyBoxes = () => {
     }
     console.log(boxRef);
 }
+
 inputNumberRef.addEventListener('change', handleAmount);
 createBtn.addEventListener('click', createBoxes);
 destroyBtn.addEventListener('click', destroyBoxes);
-// сьогодні вночі додам ЦСС            
+
+
 
 
 
